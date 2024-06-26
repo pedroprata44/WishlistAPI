@@ -1,0 +1,27 @@
+Entities:
+. Account
+    . name
+    . email
+    . listId
+. List
+    . id
+    . limit
+    . products ids
+. Products
+    . id
+    . title
+    . image
+    . price
+    . link
+
+Use cases:
+. Signup
+    . name & email
+    . email unique
+. GetAccount
+    . email
+. UpdateAccount
+    . name & email
+    . email unique
+. RemoveAccount
+    . email
