@@ -8,4 +8,7 @@ export default class Client{
         this.name = new Name(name),
         this.email = new Email(email)
     }
+    static restore(name: string, email: string){
+        return new Client(name, email)
+    }
 }
