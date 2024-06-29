@@ -1,16 +1,17 @@
-import Signup from "../src/Signup"
+import CreateClient from "../src/usecases/CreateClient"
 
-let signup: Signup
+let createClient: CreateClient
 
 beforeEach(() => {
-    signup = new Signup()
+    createClient = new CreateClient()
 })
 
-test("Should return a email already exists when do signup", function(){
+test("Should create a client", function(){
     const inputClient = {
         name: "client client",
         email: "client@client"
     }
-    const outputSignup = signup.execute(inputClient).accountEmail
-    expect(outputSignup).toBe(inputClient.email)
+    const outputCreateClient = createClient.execute(inputClient)
+    expect(outputCreateClient.accountName).toBe(inputClient.name)
+    expect(outputCreateClient.accountEmail).toBe(inputClient.email)
 })
