@@ -21,3 +21,7 @@ test("Should get a client", function(){
     expect(outputGetClient.accountEmail).toBe(inputClient.email)
     expect(outputGetClient.accountName).toBe(inputClient.name)
 })
+
+test("Should not get a client not exists", function(){
+    expect(() => getClient.execute(`client${Math.random()}@client`)).toThrow(new Error("Client not found"))
+})
