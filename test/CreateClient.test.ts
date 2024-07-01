@@ -1,4 +1,3 @@
-import { clientsEmail } from "../src/domain/main"
 import CreateClient from "../src/usecases/CreateClient"
 
 let createClient: CreateClient
@@ -6,7 +5,6 @@ let createClient: CreateClient
 beforeEach(() => {
     createClient = new CreateClient()
 })
-
 test("Should create a client", function(){
     const inputClient = {
         name: "client client",
@@ -16,7 +14,6 @@ test("Should create a client", function(){
     expect(outputCreateClient.accountName).toBe(inputClient.name)
     expect(outputCreateClient.accountEmail).toBe(inputClient.email)
 })
-
 test("Should not create a client with a email already exists", function(){
     const inputClient = {
         name: "client client",
