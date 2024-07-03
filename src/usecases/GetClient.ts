@@ -1,10 +1,12 @@
-import { clients } from "../main"
+import ClientRepository from "../repository/ClientRepository"
 
 export default class GetClient{
-    execute(email: string): Output{
-        const client = clients.find(client => client.email.value === email)
+    constructor(private clientRepository: ClientRepository){
+    }
+    async execute(email: string): Promise<Output>{
+        const client = await this.clientRepository.getByEmail(email)
         if(!client) throw new Error("Client not found")
-        return {
+        return{
             accountName: client.name.value,
             accountEmail: client.email.value
         }
