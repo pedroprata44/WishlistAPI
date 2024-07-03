@@ -1,27 +1,39 @@
+import DatabaseConnection from "../src/infra/database/DatabaseConnection"
+import PgPromiseAdapter from "../src/infra/database/PgPromiseAdapter"
+import ClientRepositoryDatabase from "../src/infra/repository/clientRepositoryDatabase"
+import ClientRepository from "../src/repository/ClientRepository"
 import CreateClient from "../src/usecases/CreateClient"
 import GetClient from "../src/usecases/GetClient"
 
+let databaseConnection: DatabaseConnection
+let clientRepository: ClientRepository
 let createClient: CreateClient
 let getClient: GetClient
 
 beforeEach(() => {
-    createClient = new CreateClient()
-    getClient = new GetClient()
+    databaseConnection = new PgPromiseAdapter()
+    clientRepository = new ClientRepositoryDatabase(databaseConnection)
+    createClient = new CreateClient(clientRepository)
+    getClient = new GetClient(clientRepository)
 })
 
-test("Should get a client", function(){
+test("Should get a client", async function(){
     const inputClient = {
         name: "client client",
-        email: "client@client"
+        email: `client${Math.random()}@client`
     }
     
-    createClient.execute(inputClient)
+    await createClient.execute(inputClient)
 
-    const outputGetClient = getClient.execute(inputClient.email)
+    const outputGetClient = await getClient.execute(inputClient.email)
     expect(outputGetClient.accountEmail).toBe(inputClient.email)
     expect(outputGetClient.accountName).toBe(inputClient.name)
 })
 
-test("Should not get a client not existing", function(){
-    expect(() => getClient.execute(`client${Math.random()}@client`)).toThrow(new Error("Client not found"))
+test("Should not get a client not existing", async function(){
+    await expect(() => getClient.execute(`client${Math.random()}@client`)).rejects.toThrow(new Error("Client not found"))
+})
+
+afterEach(() => {
+    databaseConnection.close()
 })
