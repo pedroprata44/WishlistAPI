@@ -1,12 +1,16 @@
 import Client from "../domain/Client"
-import { clients } from "../main"
+import ClientRepository from "../repository/ClientRepository"
 
 export default class UpdateClient{
-    execute(email: string, updateClient: Client){
-        const index = clients.findIndex(client => client.email.value === email)
-        if(index === -1) throw new Error("Client not found")
-        const existingClient = clients.findIndex(client => client.email.value === updateClient.email.value)
-        if(existingClient != -1) throw new Error("This email already register")
-        clients[index] = updateClient
+    constructor(private clientRepository: ClientRepository){}
+    
+    async execute(email: string, inputUpdate: Input){
+        const clientExisting = await this.clientRepository.getByEmail(email)
+        if(!clientExisting) throw new Error("Client not found")
+        await this.clientRepository.update(clientExisting.email.value, new Client(inputUpdate.name, inputUpdate.email))
     }
+}
+type Input = {
+    name: string,
+    email: string
 }

@@ -8,8 +8,8 @@ export default class ClientRepositoryDatabase implements ClientRepository{
     async save(client: Client) {
         await this.connection.query("insert into data.client (name, email) values ($1, $2)", [client.name.value, client.email.value])
     }
-    async update(client: Client) {
-        throw new Error("Method not implemented.");
+    async update(clientEmail: string, client: Client) {
+        await this.connection.query("update data.client set name = $1, email = $2 where email = $3", [client.name.value, client.email.value, clientEmail])
     }
     async getByEmail(clientEmail: string): Promise<Client | undefined> {
         const [clientExisting] = await this.connection.query("select * from data.client where email = $1", [clientEmail])
