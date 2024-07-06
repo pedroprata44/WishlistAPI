@@ -1,23 +1,40 @@
+import DatabaseConnection from "../src/infra/database/DatabaseConnection"
+import PgPromiseAdapter from "../src/infra/database/PgPromiseAdapter"
+import ClientRepositoryDatabase from "../src/infra/repository/clientRepositoryDatabase"
+import ClientRepository from "../src/repository/ClientRepository"
 import CreateClient from "../src/usecases/CreateClient"
 import GetClient from "../src/usecases/GetClient"
 import RemoveClient from "../src/usecases/RemoveClient"
 
+let databaseConnection: DatabaseConnection
+let clientRepository: ClientRepository
 let createClient: CreateClient
 let getClient: GetClient
 let removeClient: RemoveClient
 
 beforeEach(() => {
-    createClient = new CreateClient()
-    getClient = new GetClient()
-    removeClient = new RemoveClient()
+    databaseConnection = new PgPromiseAdapter()
+    clientRepository = new ClientRepositoryDatabase(databaseConnection)
+    createClient = new CreateClient(clientRepository)
+    getClient = new GetClient(clientRepository)
+    removeClient = new RemoveClient(clientRepository)
 })
 
-test("Should remove a client", function(){
+test("Should remove a client", async function (){
     const inputClient = {
         name: "client client",
         email: `client${Math.random()}@client`
     }
-    createClient.execute(inputClient)
-    removeClient.execute(inputClient.email)
-    expect(() => getClient.execute(inputClient.email)).toThrow(new Error("Client not found"))
+    const client = await createClient.execute(inputClient)
+    await removeClient.execute(client.accountEmail)
+
+    await expect(() => getClient.execute(client.accountEmail)).rejects.toThrow(new Error("Client not found"))
+})
+
+test("Should not remove a client that not exists", async function(){
+    await expect(() => removeClient.execute(`client${Math.random()}@client`)).rejects.toThrow(new Error("Client not found"))
+})
+
+afterEach(() => {
+    databaseConnection.close()
 })
