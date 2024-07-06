@@ -17,6 +17,6 @@ export default class ClientRepositoryDatabase implements ClientRepository{
         return Client.restore(clientExisting.name, clientExisting.email)
     }
     async remove(clientEmail: string){
-        throw new Error("Method not implemented.");
+        await this.connection.query("delete from data.client where email = $1", [clientEmail])
     }
 }

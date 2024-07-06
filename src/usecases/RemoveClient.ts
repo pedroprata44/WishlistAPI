@@ -1,9 +1,11 @@
-import { clients, removeClient } from "../main"
+import ClientRepository from "../repository/ClientRepository"
 
 export default class RemoveClient{
-    execute(email: string){
-        const client = clients.find(client => client.email.value === email)
-        if(!client) throw new Error("Client not found")
-        removeClient(client.email.value)
+    constructor(private clientRepository: ClientRepository){
+    }
+    async execute(email: string){
+        const clientExisting = await this.clientRepository.getByEmail(email)
+        if(!clientExisting) throw new Error("Client not found")
+        await this.clientRepository.remove(clientExisting.email.value)
     }
 }
