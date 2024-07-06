@@ -1,5 +1,4 @@
 import Client from "../domain/Client"
-import { clients } from "../main"
 import ClientRepository from "../repository/ClientRepository"
 
 export default class CreateClient{
@@ -8,10 +7,10 @@ export default class CreateClient{
     }
 
     async execute(input: Input): Promise<Output>{
-        if(clients.find(client => client.email.value === input.email)) throw new Error("This email already register")
+        const clientExisting = await this.clientRepository.getByEmail(input.email)
+        if(clientExisting) throw new Error("This email already register")
         const client = new Client(input.name, input.email)
         await this.clientRepository.save(client)
-        clients.push(client)
         return {
             accountName: client.name.value,
             accountEmail: client.email.value
