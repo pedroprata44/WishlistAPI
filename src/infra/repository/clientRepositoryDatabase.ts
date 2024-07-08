@@ -7,16 +7,20 @@ export default class ClientRepositoryDatabase implements ClientRepository{
     }
     async save(client: Client) {
         await this.connection.query("insert into data.client (name, email) values ($1, $2)", [client.name.value, client.email.value])
+        await this.connection.close()
     }
     async update(clientEmail: string, client: Client) {
         await this.connection.query("update data.client set name = $1, email = $2 where email = $3", [client.name.value, client.email.value, clientEmail])
+        await this.connection.close()
     }
     async getByEmail(clientEmail: string): Promise<Client | undefined> {
         const [clientExisting] = await this.connection.query("select * from data.client where email = $1", [clientEmail])
         if(!clientExisting) return undefined
+        await this.connection.close()
         return Client.restore(clientExisting.name, clientExisting.email)
     }
     async remove(clientEmail: string){
         await this.connection.query("delete from data.client where email = $1", [clientEmail])
+        await this.connection.close()
     }
 }
