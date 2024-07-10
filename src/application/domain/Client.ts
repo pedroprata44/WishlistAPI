@@ -1,5 +1,5 @@
-import Email from "../domain/Email"
-import Name from "../domain/Name"
+import Email from "./Email"
+import Name from "./Name"
 
 export default class Client{
     name: Name

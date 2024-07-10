@@ -1,4 +1,4 @@
-import Client from "../domain/Client";
+import Client from "../application/domain/Client";
 
 export default interface ClientRepository{
     save(client: Client): Promise<void>

@@ -1,4 +1,4 @@
-import ClientRepository from "../repository/ClientRepository"
+import ClientRepository from "../../repository/ClientRepository"
 
 export default class GetClient{
     constructor(private clientRepository: ClientRepository){

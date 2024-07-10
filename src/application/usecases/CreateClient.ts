@@ -1,5 +1,5 @@
 import Client from "../domain/Client"
-import ClientRepository from "../repository/ClientRepository"
+import ClientRepository from "../../repository/ClientRepository"
 
 export default class CreateClient{
 

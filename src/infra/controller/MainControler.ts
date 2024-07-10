@@ -1,4 +1,4 @@
-import CreateClient from "../../usecases/CreateClient";
+import CreateClient from "../../application/usecases/CreateClient";
 import HttpServer from "../http/HttpServer";
 
 export default class MainControler{

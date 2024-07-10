@@ -2,7 +2,7 @@ import MainControler from "./infra/controller/MainControler";
 import PgPromiseAdapter from "./infra/database/PgPromiseAdapter";
 import ExpressAdapter from "./infra/http/ExpressAdapter";
 import ClientRepositoryDatabase from "./infra/repository/clientRepositoryDatabase";
-import CreateClient from "./usecases/CreateClient";
+import CreateClient from "./application/usecases/CreateClient";
 
 const httpServer = new ExpressAdapter()
 const dbConnection = new PgPromiseAdapter()
