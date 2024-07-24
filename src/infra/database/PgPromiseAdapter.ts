@@ -6,7 +6,7 @@ export default class PgPromiseAdapter implements DatabaseConnection{
     constructor(){
         this.connection = pgp()("postgres://postgres:password@localhost:5432/wishlist")
     }
-    async query(statement: string, params: any): Promise<any> {
+    query(statement: string, params: any): Promise<any> {
         return this.connection.query(statement, params)
     }
     async close(): Promise<void> {
