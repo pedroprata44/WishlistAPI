@@ -31,6 +31,6 @@ test("Should not create a client with a email already exists", async function(){
     await expect(() => createClient.execute(inputClient)).rejects.toThrow(new Error("This email already register"))
 })
 
-afterEach(() => {
-    databaseConnection.close()
+afterEach(async () => {
+    await databaseConnection.close()
 })

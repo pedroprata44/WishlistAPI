@@ -35,6 +35,6 @@ test("Should not remove a client that not exists", async function(){
     await expect(() => removeClient.execute(`client${Math.random()}@client`)).rejects.toThrow(new Error("Client not found"))
 })
 
-afterEach(() => {
-    databaseConnection.close()
+afterEach(async () => {
+    await databaseConnection.close()
 })

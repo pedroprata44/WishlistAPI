@@ -34,6 +34,6 @@ test("Should not get a client not existing", async function(){
     await expect(() => getClient.execute(`client${Math.random()}@client`)).rejects.toThrow(new Error("Client not found"))
 })
 
-afterEach(() => {
-    databaseConnection.close()
+afterEach(async () => {
+    await databaseConnection.close()
 })

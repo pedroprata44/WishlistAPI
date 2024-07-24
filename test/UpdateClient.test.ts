@@ -46,6 +46,6 @@ test("Should not update a client with a email that not exists", async function (
     await expect(updateClient.execute(inputClient2.email, inputClient2)).rejects.toThrow(new Error("Client not found"))
 })
 
-afterEach(() => {
-    databaseConnection.close()
+afterEach(async () => {
+    await databaseConnection.close()
 })
