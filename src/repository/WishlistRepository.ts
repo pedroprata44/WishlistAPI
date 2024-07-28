@@ -1,5 +1,5 @@
-import Wishlist from "../application/domain/Wishlist";
+import Product from "../application/domain/Product";
 
 export default interface WishlistRepository{
-    getByEmail(clientEmail: string): Promise<Wishlist | undefined>
+    getByEmail(clientEmail: string): Promise<Product[] | undefined>
 }
