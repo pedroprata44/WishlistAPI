@@ -4,7 +4,7 @@ import GetClient from "./GetClient";
 import WishlistRepository from "../../repository/WishlistRepository";
 
 export default class AddProduct{
-    constructor(readonly clientRepository: ClientRepository, readonly wishlistRepository: WishlistRepository){
+    constructor(private clientRepository: ClientRepository, private wishlistRepository: WishlistRepository){
         
     }
     async execute(clientEmail: string, productId: string){
