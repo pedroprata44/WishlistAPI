@@ -34,6 +34,10 @@ test("Should add a product to wishlist", async function(){
 
     const products = await listProducts.execute(5)
     const productId = products[5].id
-    
+
     await addProduct.execute(outputCreateClient.accountEmail, productId)
+})
+
+afterEach(async () => {
+    await dbConnection.close()
 })
