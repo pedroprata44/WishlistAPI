@@ -3,6 +3,11 @@ drop schema data cascade;
 create schema data;
 
 create table data.client(
-    name text not null,
-    email text not null
+    email text primary key,
+    name text not null
+);
+
+create table data.wishlist(
+    client_email text references data.client(email),
+    product_id uuid not null
 );
