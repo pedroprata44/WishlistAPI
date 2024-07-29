@@ -36,6 +36,9 @@ test("Should add a product to wishlist", async function(){
     const productId = products[5].id
 
     await addProduct.execute(outputCreateClient.accountEmail, productId)
+
+    const wishlist = await getWishlist.execute(outputCreateClient.accountEmail)
+    expect(wishlist.includes(productId)).toBe(true)
 })
 
 afterEach(async () => {
