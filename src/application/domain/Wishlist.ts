@@ -1,9 +1,8 @@
 export default class Wishlist{
-    constructor(readonly clientEmail: string, readonly products: Object[]){
-        
+    constructor(readonly clientEmail: string, readonly productsIds: any[]){
     }
 
-    static restore(clientEmail: string, products: Object[]){
-        return new Wishlist(clientEmail, products)
+    static restore(clientEmail: string, productsIds: any[]){
+        return new Wishlist(clientEmail, productsIds)
     }
 }
