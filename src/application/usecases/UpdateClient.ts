@@ -1,5 +1,5 @@
 
-import Client from "../../application/domain/Client"
+import Client from "../domain/Client"
 import ClientRepository from "../../repository/ClientRepository"
 
 export default class UpdateClient{
