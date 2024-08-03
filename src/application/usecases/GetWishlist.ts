@@ -1,5 +1,6 @@
 import ClientRepository from "../../repository/ClientRepository"
 import WishlistRepository from "../../repository/WishlistRepository"
+import Product from "../domain/Product"
 
 export default class GetWishlist{
     constructor(private clientRepository: ClientRepository, private wishlisRepository: WishlistRepository){
@@ -11,11 +12,11 @@ export default class GetWishlist{
         const wishlist = await this.wishlisRepository.getByEmail(clientEmail)
         return {
             clientEmail: wishlist.clientEmail,
-            productsId: wishlist.productsIds
+            products: wishlist.products
         }
     }
 }
 type Output = {
     clientEmail: string,
-    productsId: any[]
+    products: Product[]
 }
