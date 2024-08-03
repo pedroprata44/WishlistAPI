@@ -11,11 +11,10 @@ beforeEach(() => {
 
 test("Should get products by products ids", async function(){
     const productsPage = await listProducts.execute(1)
-    const productsId: string[] = []
-    for(const product of productsPage.slice(92)){
-        productsId.push(product.id)
+    const productsId: any[] = []
+    for(const product of productsPage.slice(99)){
+        productsId.push({product_id: product.id})
     }
-
     const products = await getProduct.execute(productsId)
     expect(products).toBeDefined()
 })
