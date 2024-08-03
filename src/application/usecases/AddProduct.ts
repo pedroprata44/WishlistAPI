@@ -1,6 +1,5 @@
 import axios from "axios";
 import ClientRepository from "../../repository/ClientRepository";
-import GetClient from "./GetClient";
 import WishlistRepository from "../../repository/WishlistRepository";
 
 export default class AddProduct{
