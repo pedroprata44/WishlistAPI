@@ -33,7 +33,7 @@ beforeEach(() => {
 test("Should get a existing wishlist", async function(){
     const inputClient = {
         name: "local host",
-        email: `client${Math.random()}@localhost.com`
+        email: `client${Math.random()}@client`
     }
     const outputCreateClient = await createClient.execute(inputClient)
 
