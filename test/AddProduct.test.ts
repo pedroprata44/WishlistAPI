@@ -38,9 +38,7 @@ test("Should add a product to wishlist", async function(){
     const outputCreateClient = await createClient.execute(inputClient)
     const page = await listProducts.execute(1)
     const productId = page[0].id
-
     await addProduct.execute(outputCreateClient.accountEmail, productId)
-
     const wishlist = await getWishlist.execute(outputCreateClient.accountEmail)
     expect(wishlist.products.find(product => product.id === productId)).toBeDefined()
 })
@@ -52,7 +50,19 @@ test("Should not add a product does not exists", async function(){
     }
     const outputCreateClient = await createClient.execute(inputClient)
     const productId = crypto.randomUUID()
-    await expect(addProduct.execute(outputCreateClient.accountEmail, productId)).rejects.toThrow(new Error("Product not found"))
+    await expect(() => addProduct.execute(outputCreateClient.accountEmail, productId)).rejects.toThrow(new Error("Product not found"))
+})
+
+test("Should not add a product already exists in client wishlist", async function() {
+    const inputClient = {
+        name: "client client",
+        email: `client${Math.random()}@client`
+    }
+    const outputCreateClient = await createClient.execute(inputClient)
+    const page = await listProducts.execute(1)
+    const productId = page[0].id
+    await addProduct.execute(outputCreateClient.accountEmail, productId)
+    await expect(() => addProduct.execute(outputCreateClient.accountEmail, productId)).rejects.toThrow(new Error("This product already includes in wishlist"))
 })
 
 afterEach(async () => {
