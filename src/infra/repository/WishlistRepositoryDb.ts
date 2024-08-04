@@ -16,4 +16,8 @@ export default class WishlistRepositoryDb implements WishlistRepository{
         const output = Wishlist.restore(clientEmail, products)
         return output
     }
+    async getProductInWishlist(clientEmail:string, productId: string): Promise<any[]> {
+        const productInWishlist = await this.dbConnection.query("select * from data.wishlist where client_email = $1 and product_id = $2", [clientEmail, productId])
+        return productInWishlist
+    }
 }
