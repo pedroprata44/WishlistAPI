@@ -11,7 +11,6 @@ beforeEach(() => {
 })
 
 test("Should return a list of products", async function(){
-    const products = await listProducts.execute("1")
+    const products = await listProducts.execute("1")    
     expect(products).toBeDefined()
-    
 })

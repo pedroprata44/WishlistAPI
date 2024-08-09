@@ -1,8 +1,8 @@
 import DatabaseConnection from "../src/infra/database/DatabaseConnection"
 import PgPromiseAdapter from "../src/infra/database/PgPromiseAdapter"
-import ClientRepositoryDatabase from "../src/infra/repository/clientRepositoryDatabase"
 import ClientRepository from "../src/repository/ClientRepository"
 import CreateClient from "../src/application/usecases/CreateClient"
+import ClientRepositoryDatabase from "../src/infra/repository/ClientRepositoryDatabase"
 
 let createClient: CreateClient
 let clientRepository: ClientRepository
