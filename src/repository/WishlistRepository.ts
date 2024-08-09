@@ -1,4 +1,3 @@
-import Product from "../application/domain/Product";
 import Wishlist from "../application/domain/Wishlist";
 
 export default interface WishlistRepository{

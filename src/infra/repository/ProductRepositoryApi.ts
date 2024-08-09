@@ -23,7 +23,7 @@ export default class ProductRepositoryApi implements ProductRepository{
             const product = Product.restore(outputGetProduct.price, outputGetProduct.image, outputGetProduct.brand, outputGetProduct.id, outputGetProduct.title)
             return product
         } catch(e: any){
-            throw new Error(e)
+            throw new Error("Product not found")
         }
     }
 
