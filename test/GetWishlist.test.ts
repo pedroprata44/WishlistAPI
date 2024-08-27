@@ -3,6 +3,8 @@ import CreateClient from "../src/application/usecases/CreateClient"
 import GetProduct from "../src/application/usecases/GetProduct"
 import GetWishlist from "../src/application/usecases/GetWishlist"
 import ListProducts from "../src/application/usecases/ListProducts"
+import cacheConnection from "../src/infra/cache/cacheConnection"
+import redisAdapter from "../src/infra/cache/redisAdapter"
 import DatabaseConnection from "../src/infra/database/DatabaseConnection"
 import PgPromiseAdapter from "../src/infra/database/PgPromiseAdapter"
 import ClientRepositoryDatabase from "../src/infra/repository/ClientRepositoryDatabase"
@@ -13,6 +15,7 @@ import ProductRepository from "../src/repository/ProductRepository"
 import WishlistRepository from "../src/repository/WishlistRepository"
 
 let dbConnection: DatabaseConnection
+let cacheConnection: cacheConnection
 let createClient: CreateClient
 let clientRepository: ClientRepository
 let productRepository: ProductRepository
@@ -24,9 +27,10 @@ let getWishlist: GetWishlist
 
 beforeEach(() => {
     dbConnection = new PgPromiseAdapter()
+    cacheConnection = new redisAdapter()
     clientRepository = new ClientRepositoryDatabase(dbConnection)
     createClient = new CreateClient(clientRepository)
-    productRepository = new ProductRepositoryApi()
+    productRepository = new ProductRepositoryApi(cacheConnection)
     listProducts = new ListProducts(productRepository)
     getProduct = new GetProduct(productRepository)
     wishlistRepository = new WishlistRepositoryDb(dbConnection, getProduct)
@@ -53,4 +57,5 @@ test.only("Should get a existing wishlist", async function(){
 
 afterEach(async ()=>{
     await dbConnection.close()
+    await cacheConnection.quit()
 })
