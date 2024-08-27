@@ -3,8 +3,6 @@ import CreateClient from "../../application/usecases/CreateClient";
 import GetClient from "../../application/usecases/GetClient";
 import GetProduct from "../../application/usecases/GetProduct";
 import GetWishlist from "../../application/usecases/GetWishlist";
-import RemoveClient from "../../application/usecases/RemoveClient";
-import UpdateClient from "../../application/usecases/UpdateClient";
 import HttpServer from "../http/HttpServer";
 
 export default class MainControler{
