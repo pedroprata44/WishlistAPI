@@ -9,5 +9,5 @@ create table data.client(
 
 create table data.wishlist(
     client_email text references data.client(email),
-    product_id uuid not null
+    product_id text not null
 );
