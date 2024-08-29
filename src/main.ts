@@ -9,7 +9,7 @@ import WishlistRepositoryDb from "./infra/repository/WishlistRepositoryDb";
 import GetProduct from "./application/usecases/GetProduct";
 import ProductRepositoryApi from "./infra/repository/ProductRepositoryApi";
 import AddProduct from "./application/usecases/AddProduct";
-import redisAdapter from "./infra/cache/redisAdapter";
+import redisAdapter from "./infra/cache/RedisAdapter";
 
 const httpServer = new ExpressAdapter()
 const dbConnection = new PgPromiseAdapter()
