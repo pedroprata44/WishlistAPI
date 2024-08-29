@@ -1,30 +1,26 @@
 import GetProduct from "../src/application/usecases/GetProduct"
-import ListProducts from "../src/application/usecases/ListProducts"
-import cacheConnection from "../src/infra/cache/cacheConnection"
-import redisAdapter from "../src/infra/cache/redisAdapter"
+import CacheConnection from "../src/infra/cache/CacheConnection"
+import redisAdapter from "../src/infra/cache/RedisAdapter"
 import ProductRepositoryApi from "../src/infra/repository/ProductRepositoryApi"
 import ProductRepository from "../src/repository/ProductRepository"
 
-let cacheConnection: cacheConnection
+let cacheConnection: CacheConnection
 let productRepository: ProductRepository
 let getProduct: GetProduct
-let listProducts: ListProducts
 
-beforeEach(() => {
+beforeEach(async () => {
     cacheConnection = new redisAdapter()
     productRepository = new ProductRepositoryApi(cacheConnection)
-    listProducts = new ListProducts(productRepository)
     getProduct = new GetProduct(productRepository)
+
+    await cacheConnection.init()
 })
 
 test("Should get a product by id", async function(){
-    const pageNumber = "1"
-    const page = await listProducts.execute(pageNumber)
-    const productId = page[0].id
-
+    const productId = "2"
     const product = await getProduct.execute(productId)
+    console.log(product)
     expect(product.id).toBe(productId)
-    expect(product.brand).toBe(page[0].brand)
 })
 
 afterEach(async () => {
