@@ -5,7 +5,7 @@ export default class GetProduct{
     }
 
     async execute(productId: string){
-        const product = await this.productRepository.getProductById(productId)
-        return product
+        const productFromRepository = await this.productRepository.getById(productId)
+        return productFromRepository
     }
 }

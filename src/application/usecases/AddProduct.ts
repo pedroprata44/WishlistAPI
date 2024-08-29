@@ -8,7 +8,7 @@ export default class AddProduct{
     async execute(clientEmail: string, productId: string){
         const clientExisting = await this.clientRepository.getByEmail(clientEmail)
         if(!clientExisting) throw new Error("Client not found")
-        await this.productRepository.getProductById(productId)
+        await this.productRepository.getById(productId)
         const isProductInWishlist = await this.wishlistRepository.getProductInWishlist(clientEmail, productId)
         if(isProductInWishlist.length != 0) throw new Error("This product already includes in wishlist")
         await this.wishlistRepository.save(clientEmail, productId)
