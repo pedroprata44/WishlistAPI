@@ -2,6 +2,9 @@ import axios from "axios";
 import Product from "../../application/domain/Product";
 import ProductRepository from "../../repository/ProductRepository";
 import cacheConnection from "../cache/CacheConnection";
+import * as dotenv from 'dotenv'
+
+dotenv.config()
 
 export default class ProductRepositoryApi implements ProductRepository{
     constructor(readonly client: cacheConnection){
@@ -13,7 +16,7 @@ export default class ProductRepositoryApi implements ProductRepository{
             return JSON.parse(productFromCache) as Product
         }
         try{
-            const responseGetProduct = await axios.get(`http://localhost:3001/products/${productId}`)
+            const responseGetProduct = await axios.get(`http://localhost:${process.env.PRODUCTS_PORT}/products/${productId}`)
             const outputGetProduct = responseGetProduct.data
             const product = outputGetProduct[0] as Product
             await this.client.set(productId, JSON.stringify(product))
