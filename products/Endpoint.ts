@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express'
 import { products } from './Products'
 
 const app = express()
+app.use(express.json())
 
 app.get("/products/:id", (req: Request, res: Response) => {
     const productId = req.params.id
