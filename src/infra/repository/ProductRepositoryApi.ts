@@ -19,7 +19,7 @@ export default class ProductRepositoryApi implements ProductRepository{
             await this.client.set(productId, JSON.stringify(product))
             return product
         } catch (e: any){
-            throw new Error(`Error: ${e.message}`)
+            throw new Error("Product not found")
         }
     }
 }
