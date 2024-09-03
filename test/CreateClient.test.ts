@@ -2,7 +2,7 @@ import DatabaseConnection from "../src/infra/database/DatabaseConnection"
 import PgPromiseAdapter from "../src/infra/database/PgPromiseAdapter"
 import ClientRepository from "../src/repository/ClientRepository"
 import CreateClient from "../src/application/usecases/CreateClient"
-import ClientRepositoryDatabase from "../src/infra/repository/clientRepositoryDatabase"
+import ClientRepositoryDb from "../src/infra/repository/ClientRepositoryDb"
 
 let createClient: CreateClient
 let clientRepository: ClientRepository
@@ -10,7 +10,7 @@ let databaseConnection: DatabaseConnection
 
 beforeEach(() => {
     databaseConnection = new PgPromiseAdapter()
-    clientRepository = new ClientRepositoryDatabase(databaseConnection)
+    clientRepository = new ClientRepositoryDb(databaseConnection)
     createClient = new CreateClient(clientRepository)
 })
 test("Should create a client", async function(){

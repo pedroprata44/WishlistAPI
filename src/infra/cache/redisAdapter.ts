@@ -1,7 +1,7 @@
-import cacheConnection from "./CacheConnection";
+import CacheConnection from "./CacheConnection";
 import {createClient} from 'redis'
 
-export default class redisAdapter implements cacheConnection{
+export default class RedisAdapter implements CacheConnection{
     client: any
     constructor(){
         this.client = createClient()

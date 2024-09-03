@@ -4,7 +4,7 @@ import ClientRepository from "../src/repository/ClientRepository"
 import CreateClient from "../src/application/usecases/CreateClient"
 import GetClient from "../src/application/usecases/GetClient"
 import RemoveClient from "../src/application/usecases/RemoveClient"
-import ClientRepositoryDatabase from "../src/infra/repository/clientRepositoryDatabase"
+import ClientRepositoryDb from "../src/infra/repository/ClientRepositoryDb"
 
 let databaseConnection: DatabaseConnection
 let clientRepository: ClientRepository
@@ -14,7 +14,7 @@ let removeClient: RemoveClient
 
 beforeEach(() => {
     databaseConnection = new PgPromiseAdapter()
-    clientRepository = new ClientRepositoryDatabase(databaseConnection)
+    clientRepository = new ClientRepositoryDb(databaseConnection)
     createClient = new CreateClient(clientRepository)
     getClient = new GetClient(clientRepository)
     removeClient = new RemoveClient(clientRepository)

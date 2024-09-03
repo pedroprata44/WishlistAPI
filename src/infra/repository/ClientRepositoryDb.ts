@@ -2,7 +2,7 @@ import Client from "../../application/domain/Client";
 import ClientRepository from "../../repository/ClientRepository";
 import DatabaseConnection from "../database/DatabaseConnection";
 
-export default class ClientRepositoryDatabase implements ClientRepository{
+export default class ClientRepositoryDb implements ClientRepository{
     constructor(readonly connection: DatabaseConnection){
     }
     async save(client: Client) {

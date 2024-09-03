@@ -1,6 +1,6 @@
 import GetProduct from "../src/application/usecases/GetProduct"
 import CacheConnection from "../src/infra/cache/CacheConnection"
-import redisAdapter from "../src/infra/cache/RedisAdapter"
+import RedisAdapter from "../src/infra/cache/RedisAdapter"
 import ProductRepositoryApi from "../src/infra/repository/ProductRepositoryApi"
 import ProductRepository from "../src/repository/ProductRepository"
 
@@ -9,7 +9,7 @@ let productRepository: ProductRepository
 let getProduct: GetProduct
 
 beforeEach(async () => {
-    cacheConnection = new redisAdapter()
+    cacheConnection = new RedisAdapter()
     productRepository = new ProductRepositoryApi(cacheConnection)
     getProduct = new GetProduct(productRepository)
 

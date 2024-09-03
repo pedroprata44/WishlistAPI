@@ -6,7 +6,7 @@ import CacheConnection from "../src/infra/cache/CacheConnection"
 import RedisAdapter from "../src/infra/cache/RedisAdapter"
 import DatabaseConnection from "../src/infra/database/DatabaseConnection"
 import PgPromiseAdapter from "../src/infra/database/PgPromiseAdapter"
-import ClientRepositoryDatabase from "../src/infra/repository/clientRepositoryDatabase"
+import ClientRepositoryDb from "../src/infra/repository/ClientRepositoryDb"
 import ProductRepositoryApi from "../src/infra/repository/ProductRepositoryApi"
 import WishlistRepositoryDb from "../src/infra/repository/WishlistRepositoryDb"
 import ClientRepository from "../src/repository/ClientRepository"
@@ -18,7 +18,6 @@ let cacheConnection: CacheConnection
 let createClient: CreateClient
 let clientRepository: ClientRepository
 let wishlistRepository: WishlistRepository
-let getWishlist: GetWishlist
 let productRepository: ProductRepository
 let addProduct: AddProduct
 let getProduct: GetProduct
@@ -26,12 +25,11 @@ let getProduct: GetProduct
 beforeEach(() => {
     dbConnection = new PgPromiseAdapter()
     cacheConnection = new RedisAdapter()
-    clientRepository = new ClientRepositoryDatabase(dbConnection)
+    clientRepository = new ClientRepositoryDb(dbConnection)
     createClient = new CreateClient(clientRepository)
     productRepository = new ProductRepositoryApi(cacheConnection)
     getProduct = new GetProduct(productRepository)
     wishlistRepository = new WishlistRepositoryDb(dbConnection, getProduct)
-    getWishlist = new GetWishlist(clientRepository, wishlistRepository)
     addProduct = new AddProduct(clientRepository, wishlistRepository, productRepository)
 
     cacheConnection.init()
