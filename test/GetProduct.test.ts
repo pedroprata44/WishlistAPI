@@ -19,7 +19,6 @@ beforeEach(async () => {
 test("Should get a product by id", async function(){
     const productId = "2"
     const product = await getProduct.execute(productId)
-    console.log(product)
     expect(product.id).toBe(productId)
 })
 
