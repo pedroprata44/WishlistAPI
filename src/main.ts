@@ -10,7 +10,7 @@ import GetProduct from "./application/usecases/GetProduct";
 import ProductRepositoryApi from "./infra/repository/ProductRepositoryApi";
 import AddProduct from "./application/usecases/AddProduct";
 import * as dotenv from 'dotenv'
-import RedisAdapter from "./infra/cache/redisAdapter";
+import RedisAdapter from "./infra/cache/RedisAdapter";
 
 dotenv.config()
 
