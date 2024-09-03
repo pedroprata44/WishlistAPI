@@ -14,7 +14,7 @@ export default class redisAdapter implements cacheConnection{
         return output
     }
     async set(key: string, value: string): Promise<void> {
-        await this.client.set(key, value)
+        await this.client.setEx(key, 3600, value)
     }
     async quit(): Promise<void> {
         await this.client.quit()
