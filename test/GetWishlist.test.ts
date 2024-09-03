@@ -2,12 +2,11 @@ import AddProduct from "../src/application/usecases/AddProduct"
 import CreateClient from "../src/application/usecases/CreateClient"
 import GetProduct from "../src/application/usecases/GetProduct"
 import GetWishlist from "../src/application/usecases/GetWishlist"
-import ListProducts from "../src/application/usecases/ListProducts"
 import cacheConnection from "../src/infra/cache/CacheConnection"
 import redisAdapter from "../src/infra/cache/RedisAdapter"
 import DatabaseConnection from "../src/infra/database/DatabaseConnection"
 import PgPromiseAdapter from "../src/infra/database/PgPromiseAdapter"
-import ClientRepositoryDatabase from "../src/infra/repository/ClientRepositoryDatabase"
+import ClientRepositoryDatabase from "../src/infra/repository/clientRepositoryDatabase"
 import ProductRepositoryApi from "../src/infra/repository/ProductRepositoryApi"
 import WishlistRepositoryDb from "../src/infra/repository/WishlistRepositoryDb"
 import ClientRepository from "../src/repository/ClientRepository"
@@ -19,34 +18,33 @@ let cacheConnection: cacheConnection
 let createClient: CreateClient
 let clientRepository: ClientRepository
 let productRepository: ProductRepository
-let listProducts: ListProducts
 let addProduct: AddProduct
 let wishlistRepository: WishlistRepository
 let getProduct: GetProduct
 let getWishlist: GetWishlist
 
-beforeEach(() => {
+beforeEach(async () => {
     dbConnection = new PgPromiseAdapter()
     cacheConnection = new redisAdapter()
     clientRepository = new ClientRepositoryDatabase(dbConnection)
     createClient = new CreateClient(clientRepository)
     productRepository = new ProductRepositoryApi(cacheConnection)
-    listProducts = new ListProducts(productRepository)
     getProduct = new GetProduct(productRepository)
     wishlistRepository = new WishlistRepositoryDb(dbConnection, getProduct)
     addProduct = new AddProduct(clientRepository, wishlistRepository, productRepository)
     getWishlist = new GetWishlist(clientRepository, wishlistRepository)
+
+    await cacheConnection.init()
 })
 
 test.only("Should get a existing wishlist", async function(){
     const inputClient = {
-        name: "local host",
+        name: "client client",
         email: `client${Math.random()}@client`
     }
     const outputCreateClient = await createClient.execute(inputClient)
 
-    const page = await listProducts.execute("1")
-    const productId = page[0].id
+    const productId = "1"
 
     await addProduct.execute(outputCreateClient.accountEmail, productId)
     const wishlist = await getWishlist.execute(outputCreateClient.accountEmail)

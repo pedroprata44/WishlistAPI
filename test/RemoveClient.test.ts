@@ -4,7 +4,7 @@ import ClientRepository from "../src/repository/ClientRepository"
 import CreateClient from "../src/application/usecases/CreateClient"
 import GetClient from "../src/application/usecases/GetClient"
 import RemoveClient from "../src/application/usecases/RemoveClient"
-import ClientRepositoryDatabase from "../src/infra/repository/ClientRepositoryDatabase"
+import ClientRepositoryDatabase from "../src/infra/repository/clientRepositoryDatabase"
 
 let databaseConnection: DatabaseConnection
 let clientRepository: ClientRepository
