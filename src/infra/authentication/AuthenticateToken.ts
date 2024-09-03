@@ -1,9 +1,11 @@
 import { NextFunction } from "express";
 import jwt from 'jsonwebtoken'
+import * as dotenv from 'dotenv'
 
 export default class AuthenticateToken{
     secret: any
     constructor(){
+        dotenv.config()
         this.secret = process.env.SECRET_KEY
     }
 
