@@ -9,8 +9,8 @@ import WishlistRepositoryDb from "./infra/repository/WishlistRepositoryDb";
 import GetProduct from "./application/usecases/GetProduct";
 import ProductRepositoryApi from "./infra/repository/ProductRepositoryApi";
 import AddProduct from "./application/usecases/AddProduct";
-import RedisAdapter from "./infra/cache/RedisAdapter";
 import * as dotenv from 'dotenv'
+import RedisAdapter from "./infra/cache/redisAdapter";
 
 dotenv.config()
 
