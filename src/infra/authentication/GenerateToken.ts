@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken'
-import Client from '../../application/domain/Client'
 import * as dotenv from 'dotenv'
 
 export default class GenerateToken{
@@ -9,7 +8,7 @@ export default class GenerateToken{
         this.secret = process.env.SECRET_KEY
     }
 
-    execute(payload: Client, expiresIn: string = '1h'): string{
+    execute(payload: {accountName: string, accountEmail: string}, expiresIn: string = '1h'): string{
         return jwt.sign(payload, this.secret, {expiresIn})
     }
 }

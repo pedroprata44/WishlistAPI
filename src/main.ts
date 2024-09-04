@@ -11,6 +11,8 @@ import ProductRepositoryApi from "./infra/repository/ProductRepositoryApi";
 import AddProduct from "./application/usecases/AddProduct";
 import * as dotenv from 'dotenv'
 import RedisAdapter from "./infra/cache/RedisAdapter";
+import GenerateToken from "./infra/authentication/GenerateToken";
+import AuthenticateToken from "./infra/authentication/AuthenticateToken";
 
 dotenv.config()
 
@@ -25,7 +27,9 @@ const getProduct = new GetProduct(productRepository)
 const wishlistRepository = new WishlistRepositoryDb(dbConnection, getProduct)
 const getWishlist = new GetWishlist(clientRepository, wishlistRepository)
 const addProduct = new AddProduct(clientRepository, wishlistRepository, productRepository)
-new MainControler(httpServer, createClient, getClient, getWishlist, getProduct, addProduct)
+const generateToken = new GenerateToken()
+const authenticateToken = new AuthenticateToken()
+new MainControler(authenticateToken, generateToken, httpServer, createClient, getClient, getWishlist, getProduct, addProduct)
 
 const port = process.env.WISHLIST_PORT || "3000"
 httpServer.listen(port)
