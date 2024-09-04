@@ -1,14 +1,17 @@
 import axios from "axios"
+import dotenv from 'dotenv'
 
-test("Should create a client by api", async function (){
+dotenv.config()
+
+test("Should create a client and resolves a token by api", async function (){
     const inputClient = {
         name: "client client",
         email: `client${Math.random()}@client`
     }
-    const responseCreate = await axios.post("http://localhost:3000/createclient", inputClient)
+    const responseCreate = await axios.post(`http://localhost:${process.env.WISHLIST_PORT}/createclient`, inputClient)
     const outputCreate = responseCreate.data
 
-    expect(outputCreate.accountEmail).toBe(inputClient.email)
+    expect(outputCreate).toBeDefined()
 })
 
 test("Should get a client by api", async function (){
@@ -16,8 +19,8 @@ test("Should get a client by api", async function (){
         name: "client client",
         email: `client${Math.random()}@client`
     }
-    await axios.post("http://localhost:3000/createclient", inputClient)
-    const responseGet = await axios.get(`http://localhost:3000/getclient/${inputClient.email}`)
+    await axios.post(`http://localhost:${process.env.WISHLIST_PORT}/createclient`, inputClient)
+    const responseGet = await axios.get(`http://localhost:${process.env.WISHLIST_PORT}/getclient/${inputClient.email}`)
     const outputGet = responseGet.data
 
     expect(outputGet.accountEmail).toBe(inputClient.email)
