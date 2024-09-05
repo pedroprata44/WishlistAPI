@@ -1,7 +1,6 @@
 import AddProduct from "../src/application/usecases/AddProduct"
 import CreateClient from "../src/application/usecases/CreateClient"
 import GetProduct from "../src/application/usecases/GetProduct"
-import GetWishlist from "../src/application/usecases/GetWishlist"
 import CacheConnection from "../src/infra/cache/CacheConnection"
 import RedisAdapter from "../src/infra/cache/RedisAdapter"
 import DatabaseConnection from "../src/infra/database/DatabaseConnection"
