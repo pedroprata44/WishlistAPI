@@ -14,7 +14,7 @@ export default class MainControler{
             const token = generateToken.execute(outputCreateClient)
             return token
         })
-        this.httpServer.registerProtected("get", "/protected", this.authenticateToken.authenticateToken, function(params: any, body: any){
+        this.httpServer.registerProtected("post", "/protected", this.authenticateToken.authenticateToken, function(params: any, body: any){
             const output = body.client
             return output
         })
@@ -22,11 +22,11 @@ export default class MainControler{
             const output = await getClient.execute(params.email)
             return output
         })
-        this.httpServer.register("post", "/addproduct/:email", async function (params: any, body: any) {
-            const output = await addProduct.execute(params.email, body)
+        this.httpServer.registerProtected("post", "/addproduct/:email", this.authenticateToken.authenticateToken, async function (params: any, body: any) {
+            const output = await addProduct.execute(params.email, body.productId)
             return output
         })
-        this.httpServer.register("get", "/getwishlist/:email", async function (params: any, body: any) {
+        this.httpServer.registerProtected("get", "/getwishlist/:email", this.authenticateToken.authenticateToken, async function (params: any, body: any) {
             const output = await getWishlist.execute(params.email)
             return output
         })
