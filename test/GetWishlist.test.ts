@@ -33,8 +33,6 @@ beforeEach(async () => {
     wishlistRepository = new WishlistRepositoryDb(dbConnection, getProduct)
     addProduct = new AddProduct(clientRepository, wishlistRepository, productRepository)
     getWishlist = new GetWishlist(clientRepository, wishlistRepository)
-
-    await cacheConnection.init()
 })
 
 test.only("Should get a existing wishlist", async function(){
@@ -55,5 +53,4 @@ test.only("Should get a existing wishlist", async function(){
 
 afterEach(async ()=>{
     await dbConnection.close()
-    await cacheConnection.quit()
 })

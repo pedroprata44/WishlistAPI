@@ -31,8 +31,6 @@ beforeEach(() => {
     getProduct = new GetProduct(productRepository)
     wishlistRepository = new WishlistRepositoryDb(dbConnection, getProduct)
     addProduct = new AddProduct(clientRepository, wishlistRepository, productRepository)
-
-    cacheConnection.init()
 })
 
 test("Should add a product to client wishlist", async function(){
@@ -46,8 +44,6 @@ test("Should add a product to client wishlist", async function(){
     await addProduct.execute(outputCreateClient.accountEmail, productId)
     const getProductInWishlist = await wishlistRepository.getProductInWishlist(outputCreateClient.accountEmail, productId)
     expect(getProductInWishlist.length).toBe(1)
-
-
 })
 
 test("Should not add a product does not exists", async function(){
@@ -73,5 +69,4 @@ test("Should not add a product already exists in client wishlist", async functio
 
 afterEach(async () => {
     await dbConnection.close()
-    await cacheConnection.quit()
 })
