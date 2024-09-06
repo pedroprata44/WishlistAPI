@@ -11,7 +11,7 @@ app.use(express.json())
 app.get("/products/:id", (req: Request, res: Response) => {
     const productId = req.params.id
     const product = products.filter(product => product.id === productId)
-    if(product.length === 0) res.sendStatus(404).json("Product not found")
+    if(product.length === 0) return res.json("Product not found")
     res.json(product)
 })
 app.listen(port)

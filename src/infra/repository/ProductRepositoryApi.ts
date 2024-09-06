@@ -12,17 +12,14 @@ export default class ProductRepositoryApi implements ProductRepository{
     }
     async getById(productId: string){
         const productFromCache = await this.client.get(productId)
-        if(productFromCache){
-            return JSON.parse(productFromCache) as Product
-        }
-        try{
-            const responseGetProduct = await axios.get(`http://localhost:${process.env.PRODUCTS_PORT}/products/${productId}`)
-            const outputGetProduct = responseGetProduct.data
-            const product = outputGetProduct[0] as Product
-            await this.client.set(productId, JSON.stringify(product))
-            return product
-        } catch (e: any){
-            throw new Error("Product not found")
-        }
+        if(productFromCache) return JSON.parse(productFromCache) as Product
+
+        const responseGetProduct = await axios.get(`http://localhost:${process.env.PRODUCTS_PORT}/products/${productId}`)
+        const outputGetProduct = responseGetProduct.data
+        
+        if(outputGetProduct === "Product not found") throw new Error("Product not found")
+        const product = outputGetProduct[0] as Product
+        await this.client.set(productId, JSON.stringify(product))
+        return product
     }
 }
