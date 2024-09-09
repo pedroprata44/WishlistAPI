@@ -117,7 +117,5 @@ test("Should get a product by api", async function(){
 
     const responseGetProduct = await axios.get(`http://localhost:${process.env.WISHLIST_PORT}/getproduct/1`, config)
     const product = responseGetProduct.data
-
-    console.log(product);
     expect(product.id).toBeDefined()
 })
