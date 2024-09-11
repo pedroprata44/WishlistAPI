@@ -84,6 +84,6 @@ npx jest
 ~~~
 
 ## Dev by
-###### Pedro Alves Prata Neto
+##### Pedro Alves Prata Neto
 
 ###### [github.com/pedroprata44](http://github.com/pedroprata44)
