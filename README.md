@@ -68,28 +68,28 @@ curl --location --request GET 'http://localhost:3000/getclient/1' \
 
 ## Routes
 
-###### To create a client
+To create a client
 > /createclient
 
 For this route, send input client (name: string, email: string) in request body
 
-###### To get a client register
+To get a client register
 
 > /getclient/:email
 
-###### To update a client register
+To update a client register
 
 > /updateclient/:email
 
-###### To remove a client register
+To remove a client register
 
 > /removeclient/:email
 
-###### To add a product in client wishlist
+To add a product in client wishlist
 
 > /addproduct/:productid
 
-##### To get client wishlist
+To get client wishlist
 
 > /getwishlist/:email
 
