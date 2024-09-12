@@ -1,5 +1,5 @@
 # WISHLIST API
-#### Manager your products wishlist from eccomerce
+### Your product wishlist manager
 
 #### Create and manage your client account. Manage your products in your wishlist
 
