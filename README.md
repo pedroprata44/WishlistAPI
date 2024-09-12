@@ -4,16 +4,17 @@
 ##### Allows create, update, remove an account, search and favorite your products in your own wishlist
 
 ### Tecnologies
-- Typescript (main language)
-- Node JS (main js enviroment)
-- Postgres SQL (main sql database)
-- Redis cache (caching)
-- Jest framework (main tests (integration, unities))
-- Express, Axios (http server)
-- JWT (authentication)
+
+- Main language: Typescript
+- JS Enviroment: Node JS
+- Main SQL db: Postgres
+- Cache: Redis Cache
+- Tests: Jest Framework
+- HTTP: Express, Axios
+- Auth: JWT
 
 ### How to install with Docker?
-###### First install Docker Desktop at -> https://www.docker.com/
+Install Docker Desktop at -> https://www.docker.com/
 ~~~
 # Clone the repository
 git clone https://github.com/pedroprata44/WishlistAPI.git
