@@ -1,7 +1,7 @@
 # WISHLIST API
 #### Manager your products wishlist from eccomerce
 
-##### Allows create, update, remove an account, search and favorite your products in your own wishlist
+#### Create and manage your client account. Manage your products in your wishlist
 
 ### Tecnologies
 
