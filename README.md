@@ -27,23 +27,22 @@ docker-compose -f docker-compose.yml up -d
 
 ## How to up application in localhost
 
-###### Rename file ".env.example" to  ".env"
-###### Set valus in enviroment in ".env"
+Rename file ".env.example" to  ".env"
+Set valus in enviroment in ".env"
 
-###### Run sql script create file "create.sql" in your postgres admin to set db
+Run sql script create file "create.sql" in your postgres admin to set db
 
 
-###### Init Products Endpoint
+Init Products Endpoint
 
 ~~~
 npx nodemon products/endpoint.ts
 ~~~
 
-###### Init Wishlist Api
+Init Wishlist Apis
 ~~~
 npx nodemon src/main.ts
 ~~~
-######
 
 ### Generate Token to acess routes
 ###### Every route needs a Bearer Token to use 
