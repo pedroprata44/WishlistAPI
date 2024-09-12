@@ -93,18 +93,18 @@ To get client wishlist
 > /getwishlist/:email
 
 ## How to run test cases?
-###### Init products endpoint and API
+Init products endpoint and API
 ~~~
 npx nodemon products/endpoint.ts
 npx nodemon src/main.ts
 ~~~
 
-###### Run docker-compose
+Run docker-compose
 ~~~
 docker-compose  -f docker-compose.yml up -d
 ~~~
 
-###### Run test cases
+Run test cases
 ~~~
 npx jest
 ~~~
