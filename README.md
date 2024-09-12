@@ -13,7 +13,7 @@
 - JWT (authentication)
 
 ### How to install with Docker?
-> First install Docker Desktop at -> https://www.docker.com/
+###### First install Docker Desktop at -> https://www.docker.com/
 ~~~
 # Clone the repository
 git clone https://github.com/pedroprata44/WishlistAPI.git
@@ -27,19 +27,19 @@ docker-compose -f docker-compose.yml up -d
 
 ## How to up application in localhost
 
-##### 1. Rename file ".env.example" to  ".env"
-##### 2. Set valus in enviroment in ".env"
+###### Rename file ".env.example" to  ".env"
+###### Set valus in enviroment in ".env"
 
-##### 3. Run sql script create file "create.sql" in your postgres admin to set db
+###### Run sql script create file "create.sql" in your postgres admin to set db
 
 
-##### 4. Init Products Endpoint
+###### Init Products Endpoint
 
 ~~~
 npx nodemon products/endpoint.ts
 ~~~
 
-##### 5. Init Wishlist Api
+###### Init Wishlist Api
 ~~~
 npx nodemon src/main.ts
 ~~~
